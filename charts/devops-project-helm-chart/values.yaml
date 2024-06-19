@@ -6,20 +6,14 @@
 replicaCount: 3
 
 image:
-  repository: yoav7001/devops-project
+  repository: ""
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "985d9694275a5e67edb53169da2bbc2d2a1083c5"
+  tag: ""
 
 env:
-  USERNAME: "test"
-  VERSION: 0.1.0
 
 sealedsecret:
-  hello: | 
-    AgB1NzspxwpltL9af7n1FiyGrSYpRKmqqX5mBucZHhyCcYDC8vp3HYz32lza9MinOIju+DEb4tVsUa5YgDfN7RG0DYlCALkTOwVfb9ouTpHN+1QyoG4ebLo2suWEU6yIb2XsDqXjv6JJWB3TJQAeyBQh6tFzApnWwEiC4eNuZ95SB9pTIQZdeC9kH68TMW3VT+FC8iOY3zsGVLXwvOhCNWk7pMrYyj4JuBbzQP1HvQ2t5d3VZ7fqsM+ll4ocwDFDCUpnMgnoOFAwE8y6Us884g2z5iFWLETN9e7Asks/6OfaFzew15X6FzQAEZ93pib+aeka+k9U9JdySGqt7hEo39NyoeEo643vmHmU8lKTYj9aUNUEVe+gp9hZ1vGTUGBrDIeacUrtrgT4dNZr++VPsDbgnc2HqY+12r1IUChtNMfkINHR4ZrETbEYAybW81KPlvYjcESl/oD9jwUrFQGAurGVx+e9XXKTnlp/FfjmRd03UIxyv7hM37vcdOtKgmFSRCH8ctE6O5LEIqYMyta3+uV9QhMRVOuT+O+jKFIHZLEfFCqCSP3VRJKRKM31F6zeDMPUyyRF29HcxK5R+ra7VrL0HDAshtUrWijExZCNykF8RpFGDxxqoJz9aVOLW4eHkzGwxEfAAn7RxfWXclQiStRkzDEzL+F6GKITwaYPO8xlKLrbIfem/fVVptI74/G19KKTlVbneA==
-  TEST: |
-    AgCJoaLTk+jIUllbYquMBiCWuuqs6wyZYRvhdKZTqN/ONMTn1ZxSBajLPo9i5jW+2zcKbcLj77figvqLNCYsaP4u/TE3/dBG3kldU/YVNm/U0JzSb263F5G9W16/zZ7N5xmU9JhFVOJQpOVNsK7J+flPDahbUfMDwX4ZHfboqK2E3OIrk2/TNs6TqiWfCUjgvxB2aWGdqQaT7AkFWQy+jUo8VvNFabGFx8TeH5kvGG5D4Jan02tMQhjCJoxP80LZfgfu+JQyEmGbGPpA21KZ2ZPT3uuTBysxIS4XHS0Y4p+QOPrAPpEcKVjt+BSsTR7hFhKUA9tm3KAdz5UcJrCGLvq3ElrYihoKbPXWNCKUo7jHibRIlQMJnb9Lpc/WglwBzJFJYKNJp5Oh8+gmols/tRwyTOSRucs9QVk9WqX2T24wTk48uJx/dwVfulimYmbak7U21kaqq8bSqZQpqy/ypV/frcJcIaGUuzK0JKY0YfEj0WlAF5UgcnrRMdI4dc5sTk/qfqZQpW9ZE2l5aMkVruLvM7Xw0+1z11ZXjNgrGVI5lfJvNkwOR4+skEmfma/aNq2bU1ch2AZqO9X07qvu/5UiaaYbHbGe+/UuBEab5Hnq/Z0PjhLeN87lRL/FANl1y5lxl5o17xxdfGxdlTrdGpMJ6dFyFSp/c6bLGfeVhUYZt2uJagx2Rmka1V6Ee78GxIEI96f0bGo9C4M=
 
 secrets:
 
