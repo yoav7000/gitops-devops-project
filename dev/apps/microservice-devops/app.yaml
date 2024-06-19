@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: microservice-devops
+  namespace: argocd
+spec:
+  destination:
+    namespace: dev
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: charts/devops-project-helm-chart
+    repoURL: https://github.com/yoav7000/gitops-devops-project.git
+    helm:
+      valueFiles:
+      - dev/apps/microservice-devops/values.yaml
