@@ -28,6 +28,7 @@ ingress:
     - host: dev.ori.yoav.com
       paths:
         - path: /
+          pathType: ImplementationSpecific
 
 autoscaling:
   enabled: true
