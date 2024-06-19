@@ -13,7 +13,7 @@ spec:
     repoURL: https://github.com/yoav7000/gitops-devops-project.git
     helm:
       valueFiles:
-      - dev/apps/microservice-devops/values.yaml
+      - ../dev/apps/microservice-devops/values.yaml
   syncPolicy:
     automated:
       prune: true
