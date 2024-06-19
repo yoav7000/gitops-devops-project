@@ -25,7 +25,7 @@ imageCredentials:
   registry: ""
 
 # Existing image pull secrets names.
-imagePullSecrets: [{"name": "yoav-image-pull-secret"}]
+imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
