@@ -14,3 +14,9 @@ spec:
     helm:
       valueFiles:
       - dev/apps/microservice-devops/values.yaml
+   syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
