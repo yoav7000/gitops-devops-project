@@ -8,3 +8,9 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   description: Dev Environment
+  # Allow manifests to deploy from any Git repos
+  sourceRepos:
+  - '*'
+  destinations:
+  - namespace: '*'
+    server: '*'
