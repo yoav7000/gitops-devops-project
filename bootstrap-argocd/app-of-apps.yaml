@@ -22,11 +22,11 @@ spec:
       source:
         directory:
           recurse: true
-        repoURL: https://github.com/Orisade2003/gitops-devops-project.git
+        repoURL: https://github.com/yoav7000/gitops-devops-project.git
         path: '{{.environment}}'
       destination:
         server: '{{.server}}'
-        environment: '{{.environment}}'
+        namespace: '{{.environment}}'
       syncPolicy:
         automated:
           prune: true
