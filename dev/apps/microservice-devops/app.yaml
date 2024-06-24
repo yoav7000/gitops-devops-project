@@ -7,7 +7,7 @@ spec:
   destination:
     namespace: dev
     server: https://kubernetes.default.svc
-  project: default
+  project: dev
   source:
     path: charts/devops-project-helm-chart
     repoURL: https://github.com/yoav7000/gitops-devops-project.git
