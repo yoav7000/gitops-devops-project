@@ -1,35 +1,51 @@
 apiVersion: argoproj.io/v1alpha1
-kind: ApplicationSet
+kind: Application
 metadata:
   name: app-of-apps
   namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
 spec:
-  goTemplate: true
-  generators:
-  - list:
-      elements:
-      - environment: dev
-        server: https://kubernetes.default.svc
-      # - environment: staging
-      #   server: https://kubernetes.default.svc
-      # - environment: prod
-      #   server: https://kubernetes.default.svc
-  template:
-    metadata:
-      name: '{{.environment}}-app-of-apps'
-    spec:
-      project: default
-      source:
-        directory:
-          recurse: true
-        repoURL: https://github.com/yoav7000/gitops-devops-project.git
-        path: '{{.environment}}'
-      destination:
-        server: '{{.server}}'
-        namespace: '{{.environment}}'
-      syncPolicy:
-        automated:
-          prune: true
-          selfHeal: true
-        syncOptions:    
-        - CreateNamespace=true
+  destination:
+    namespace: default
+    name: in-cluster
+  project: default
+  source:
+    path: apps
+    repoURL: https://github.com/yoav7000/gitops-devops-project.git
+    targetRevision: HEAD
+    directory:
+      recurse: true
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+
+---
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: projects-app-of-apps
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: default
+    name: in-cluster
+  project: default
+  source:
+    path: projects
+    repoURL: https://github.com/yoav7000/gitops-devops-project.git
+    targetRevision: HEAD
+    directory:
+      recurse: true
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
