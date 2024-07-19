@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: microservice-devops-appset
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - git:
+      repoURL: https://github.com/yoav7000/gitops-devops-project.git
+      revision: HEAD
+      directories:
+      - path: apps/microservice-devops/*
+  template:
+    metadata:
+      name: 'microservice-devops-{{.path.basename}}'
+    spec:
+      project: '{{.path.basename}}'
+      source:
+        repoURL: https://github.com/yoav7000/gitops-devops-project.git
+        targetRevision: HEAD
+        path: charts/devops-project-helm-chart
+        helm:
+          valueFiles:
+          - '{{.path.basename}}/values.yaml'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{.path.basename}}'
+      syncPolicy:
+        syncOptions:
+        - CreateNamespace=true
