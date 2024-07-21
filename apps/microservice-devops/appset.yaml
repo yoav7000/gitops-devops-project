@@ -23,7 +23,7 @@ spec:
         path: charts/devops-project-helm-chart
         helm:
           valueFiles:
-          - '{{.path.basename}}/values.yaml'
+          - '../{{.path.basename}}/values.yaml'
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{.path.basename}}'
