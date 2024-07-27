@@ -23,7 +23,7 @@ spec:
         path: charts/devops-project-helm-chart
         helm:
           valueFiles:
-          - '/environments/dev/microservice-devops-values.yaml'
+          - '/{{.path.path}}/microservice-devops-values.yaml'
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{.path.basename}}'
