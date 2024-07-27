@@ -11,7 +11,7 @@ spec:
       repoURL: https://github.com/yoav7000/gitops-devops-project.git
       revision: HEAD
       directories:
-      - path: apps/microservice-devops/*
+      - path: environments/*
   template:
     metadata:
       name: 'microservice-devops-{{.path.basename}}'
@@ -23,7 +23,7 @@ spec:
         path: charts/devops-project-helm-chart
         helm:
           valueFiles:
-          - '/apps/microservice-devops/{{.path.basename}}/values.yaml'
+          - '{{.path.path}}/microservice-devops-values.yaml'
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{.path.basename}}'
