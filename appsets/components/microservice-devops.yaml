@@ -25,7 +25,7 @@ spec:
         path: charts/devops-project-helm-chart
         helm:
           valueFiles:
-          - '/{{.path.path}}/values/microservice-devops-values.yaml'
+          - 'environments/{{.values.env_name}}/values/microservice-devops-values.yaml'
       destination:
         name: "{{.cluster.name}}"
         namespace: '{{.values.env_name}}'
