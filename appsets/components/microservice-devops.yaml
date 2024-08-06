@@ -18,7 +18,7 @@ spec:
     metadata:
       name: "microservice-devops-{{.values.env_name}}"
     spec:
-      project: '{{index .path.segments 1}}'
+      project: "{{.path.basename}}"
       source:
         repoURL: https://github.com/yoav7000/gitops-devops-project.git
         targetRevision: HEAD
