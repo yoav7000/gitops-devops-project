@@ -10,23 +10,25 @@ spec:
   - git:
       repoURL: https://github.com/yoav7000/gitops-devops-project.git
       revision: HEAD
-      directories:
-      - path: environments/*
+      files:
+      - path: environments/**/cluster-config/cluster-config.json
+      values:
+        env: "{{index .path 1}}"
   template:
     metadata:
-      name: 'microservice-devops-{{.path.basename}}'
+      name: 'microservice-devops-{{.values.env}}'
     spec:
-      project: '{{.path.basename}}'
+      project: '{{.values.env}}'
       source:
         repoURL: https://github.com/yoav7000/gitops-devops-project.git
         targetRevision: HEAD
         path: charts/devops-project-helm-chart
         helm:
           valueFiles:
-          - '/{{.path.path}}/microservice-devops-values.yaml'
+          - '/{{.path.path}}/values/microservice-devops-values.yaml'
       destination:
-        server: https://kubernetes.default.svc
-        namespace: '{{.path.basename}}'
+        server: "{{.cluster.name}}"
+        namespace: '{{.values.env}}'
       syncPolicy:
         automated:
           prune: true
