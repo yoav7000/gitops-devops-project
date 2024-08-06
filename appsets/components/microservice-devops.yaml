@@ -27,7 +27,7 @@ spec:
           valueFiles:
           - '/{{.path.path}}/values/microservice-devops-values.yaml'
       destination:
-        server: "{{.cluster.name}}"
+        name: "{{.cluster.name}}"
         namespace: '{{.values.env_name}}'
       syncPolicy:
         automated:
