@@ -25,7 +25,7 @@ service:
 ingress:
   enabled: true
   hosts:
-    - host: dev.ori.yoav.com
+    - host: dev2.ori.yoav.com
       paths:
         - path: /
           pathType: ImplementationSpecific
