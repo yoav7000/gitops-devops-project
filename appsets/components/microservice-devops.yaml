@@ -13,10 +13,10 @@ spec:
       files:
       - path: environments/**/cluster-config/cluster-config.json
       values:
-        env: "{{index .path 1}}"
+        env_name: "{{index .path 1}}"
   template:
     metadata:
-      name: "microservice-devops-{{.values.env}}"
+      name: "microservice-devops-{{.values.env_name}}"
     spec:
       project: "dev"
       source:
@@ -28,7 +28,7 @@ spec:
           - '/{{.path.path}}/values/microservice-devops-values.yaml'
       destination:
         server: "{{.cluster.name}}"
-        namespace: '{{.values.env}}'
+        namespace: '{{.values.env_name}}'
       syncPolicy:
         automated:
           prune: true
