@@ -13,7 +13,7 @@ spec:
       files:
       - path: environments/**/cluster-config/cluster-config.json
       values:
-        env_name: "{{index .path.segments 1}}"
+        env_name: "{{index .path.segments 0}}"
   template:
     metadata:
       name: "microservice-devops-{{.values.env_name}}"
