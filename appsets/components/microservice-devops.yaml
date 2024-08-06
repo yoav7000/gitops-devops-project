@@ -16,9 +16,9 @@ spec:
         env: "{{index .path 1}}"
   template:
     metadata:
-      name: 'microservice-devops-{{.values.env}}'
+      name: "microservice-devops-{{.values.env}}"
     spec:
-      project: '{{.values.env}}'
+      project: "{{.values.env}}"
       source:
         repoURL: https://github.com/yoav7000/gitops-devops-project.git
         targetRevision: HEAD
