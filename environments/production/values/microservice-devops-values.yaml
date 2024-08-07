@@ -11,7 +11,7 @@ image:
 imagePullSecrets: [{"name": "yoav-image-pull-secret"}]
 
 env:
-  ENVIRONMENT: "STAGING"
+  ENVIRONMENT: "PROD"
 
 # sealedsecret:
 #   hello: | 
@@ -25,7 +25,7 @@ service:
 ingress:
   enabled: true
   hosts:
-    - host: staging.ori.yoav.com
+    - host: prod.ori.yoav.com
       paths:
         - path: /
           pathType: ImplementationSpecific
