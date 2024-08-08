@@ -1,0 +1,46 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: microservice-devops-harta-appset
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - merge:
+      mergeKeys:
+        - 
+      generators:
+      - git:
+          repoURL: https://github.com/yoav7000/gitops-devops-project.git
+          revision: HEAD
+          files:
+          - path: environments/**/cluster-config/cluster-config.json
+          values:
+            env_name: "{{index .path.segments 1}}"
+      - git:
+          repoURL: https://github.com/yoav7000/gitops-devops-project.git
+          revision: HEAD
+          files:
+          - path: "environments/{{.values.env_name}}/values/microservice-devops-values.yaml"
+  template:
+    metadata:
+      name: "microservice-devops-harta-{{.path.basename}}"
+    spec:
+      project: '{{.values.env_name}}'
+      source:
+        repoURL: https://github.com/yoav7000/gitops-devops-project.git
+        targetRevision: HEAD
+        path: charts/devops-project-helm-chart
+        helm:
+          valueFiles:
+          - '/environments/dev/values/microservice-devops-values.yaml'
+      destination:
+        name: "{{.cluster.name}}"
+        namespace: 'dev'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+        - CreateNamespace=true
