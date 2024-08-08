@@ -7,13 +7,24 @@ spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   generators:
-  - git:
-      repoURL: https://github.com/yoav7000/gitops-devops-project.git
-      revision: HEAD
-      files:
-      - path: environments/**/cluster-config/cluster-config.json
-      values:
-        env_name: "{{index .path.segments 1}}"
+    - matrix:
+        generators:
+          - git:
+              repoURL: https://github.com/yoav7000/gitops-devops-project.git
+              revision: HEAD
+              files:
+              - path: "environments/**/cluster-config/cluster-config.json"
+              pathParamPrefix: config # when using 2 git generators.
+              values:
+                env_name: "{{index .config.path.segments 1}}"
+                cluster_name: "{{.cluster.name}}"
+
+          - git:
+              repoURL: https://github.com/yoav7000/gitops-devops-project.git
+              revision: HEAD
+              files:
+              - path: "environments/{{.values.env_name}}/values/microservice-devops-values.yaml"
+      
   template:
     metadata:
       name: "microservice-devops-{{.values.env_name}}"
@@ -25,9 +36,9 @@ spec:
         path: charts/devops-project-helm-chart
         helm:
           valueFiles:
-          - '/environments/{{.values.env_name}}/values/microservice-devops-values.yaml'
+          - "/{{.path.path}}/{{.path.filename}}"
       destination:
-        name: "{{.cluster.name}}"
+        name: "{{.values.cluster_name}}"
         namespace: '{{.values.env_name}}'
       syncPolicy:
         automated:

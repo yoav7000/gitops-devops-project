@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: harta2-appset
+  name: microservice-devops-appset
   namespace: argocd
 spec:
   goTemplate: true
@@ -27,7 +27,7 @@ spec:
       
   template:
     metadata:
-      name: "harta2-{{.values.env_name}}"
+      name: "microservice-devops-{{.values.env_name}}"
     spec:
       project: '{{.values.env_name}}'
       source:
