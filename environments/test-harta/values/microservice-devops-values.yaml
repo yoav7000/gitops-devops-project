@@ -1,0 +1,38 @@
+
+replicaCount: 3
+
+image:
+  repository: yoav7001/devops-project
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "985d9694275a5e67edb53169da2bbc2d2a1083c5"
+
+# Existing image pull secrets names.
+imagePullSecrets: [{"name": "yoav-image-pull-secret"}]
+
+env:
+  ENVIRONMENT: "STAGING"
+
+# sealedsecret:
+#   hello: | 
+#     AgCA4rEUyYTF5xJwfjA6mjLi69zNeHN6hxCVwroxoSa9f2yHw/onXjOETDnaQhOUoid18qEo+XC/Hyk0F5qwh389Bsyqefnk6fzB7hyxQDYQhZYRMCIUK6eDIVcmulIQRQR9bITSvDyWcRB2/8Jy44SX75o4yt34i7wpLhOdjzBXruJhIaPopdyPasI4ibT8a+JqJCzj/Rvq8RpUvpU3rFl+eeIfUNVitWT6GCThbtqBJh/r9bkQa+IR6uH84eZucO9kqIC5wYENMC5Wr1m6auCuIvC4tDSFqxYGDAg3+pGxl8uaFlF/mvdHnBNG1nzaS+aG4kLSx7d/mwAPJHJUcuYJ9yJj8uxoVZZBm83ub/OpnFAmO6TzGVPD2HrkhKdxDSBvqvWnmndfTLc1S7vRGlTtnVvynuJsAqH6i5gqRxF4mgt4xIUNE14t9zKtgwJGmuJqFpykfE3K1lC+BSehst+sIcXEJBPHcRAXkPD3Ei27zwc01pkzeMbTZ3YyUJlbRi+MRY9Dn8hiJeZ56CSKbxz8ICyFlbxLubTnrOn2S1NsvNT8EzWTLmLNAX/7r0BynC50icbF7thEwJJ2MIRc7jZOchM146K645QzwS874mXw5+wGb4Esaea9BdIFiJnDN1gF+pM+cOhZJJmcwiunW/B4KwuiEOJGNJSD0qVOBDNJWEjl49QAF7iP4W8KPOdFshb2lQx2mRFJmwdwHQ==
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+ingress:
+  enabled: true
+  hosts:
+    - host: staging.ori.yoav.com
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 1
+  # targetMemoryUtilizationPercentage: 80
