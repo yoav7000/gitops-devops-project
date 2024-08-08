@@ -1,31 +1,23 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: microservice-devops-harta-appset
+  name: wtrtwret-sdtstr-appset
   namespace: argocd
 spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   generators:
-  - merge:
-      mergeKeys:
-        - 
-      generators:
-      - git:
-          repoURL: https://github.com/yoav7000/gitops-devops-project.git
-          revision: HEAD
-          files:
-          - path: environments/**/cluster-config/cluster-config.json
-          values:
-            env_name: "{{index .path.segments 1}}"
-      - git:
-          repoURL: https://github.com/yoav7000/gitops-devops-project.git
-          revision: HEAD
-          files:
-          - path: "environments/{{.values.env_name}}/values/microservice-devops-values.yaml"
+  - git:
+      repoURL: https://github.com/yoav7000/gitops-devops-project.git
+      revision: HEAD
+      files:
+      - path: environments/**/cluster-config/cluster-config.json
+      values:
+        env_name: "{{index .path.segments 1}}"
+        cluster_name: "{{.cluster.name}}"
   template:
     metadata:
-      name: "microservice-devops-harta-{{.path.basename}}"
+      name: "sdfdssdf-sdfdst-{{.values.env_name}}"
     spec:
       project: '{{.values.env_name}}'
       source:
@@ -34,10 +26,10 @@ spec:
         path: charts/devops-project-helm-chart
         helm:
           valueFiles:
-          - '/environments/dev/values/microservice-devops-values.yaml'
+          - '/environments/{{.values.env_name}}/values/microservice-devops-values.yaml'
       destination:
-        name: "{{.cluster.name}}"
-        namespace: 'dev'
+        name: "{{.values.cluster_name}}"
+        namespace: '{{.values.env_name}}'
       syncPolicy:
         automated:
           prune: true
